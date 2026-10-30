@@ -77,7 +77,7 @@ fun Root(dark: Boolean, onDark: (Boolean) -> Unit) {
     BackHandler(chat != null || story != null) { if (story != null) story = null else chat = null }
 
     Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
-        AnimatedContent(tab, transitionSpec = { fadeIn(MaterialTheme.motionScheme.defaultEffectsSpec()) togetherWith fadeOut() }) {
+        AnimatedContent(tab, transitionSpec = { fadeIn(tween(250)) togetherWith fadeOut(tween(250)) }) {
             when (it) {
                 0 -> Feed()
                 1 -> SearchScreen()
