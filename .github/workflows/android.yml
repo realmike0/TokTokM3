@@ -15,21 +15,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
+
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: 8.11.1
+
       - name: Build debug APK
         run: gradle assembleDebug --stacktrace
+
       - name: Salva l'APK
         uses: actions/upload-artifact@v4
         with:
           name: TokTokM3-debug
           path: app/build/outputs/apk/debug/*.apk
-      - name: Release (solo tag v*)
+
+      - name: Crea la release (solo con tag v*)
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
