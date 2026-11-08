@@ -57,6 +57,8 @@ import androidx.media3.effect.OverlayEffect
 import androidx.media3.effect.RgbAdjustment
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.transformer.*
+import androidx.media3.transformer.Composition
+import androidx.media3.effect.TextureOverlay
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import com.google.common.collect.ImmutableList
@@ -141,7 +143,7 @@ fun EditorScreen(uri: Uri, photo: Boolean, onClose: () -> Unit, onPublish: (Stri
         if (ovs.isNotEmpty()) {
             val bm = Bitmap.createBitmap(vw, vh, Bitmap.Config.ARGB_8888)
             drawOv(ACanvas(bm), vw, vh, ovs, box.width.toFloat(), dens)
-            fx += OverlayEffect(ImmutableList.of(BitmapOverlay.createStaticBitmapOverlay(bm)))
+            fx += OverlayEffect(ImmutableList.of<TextureOverlay>(BitmapOverlay.createStaticBitmapOverlay(bm)))
         }
         val file = File(ctx.getExternalFilesDir(null), "v_$now.mp4")
         val mi = MediaItem.Builder().setUri(uri).setClippingConfiguration(
