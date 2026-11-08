@@ -20,7 +20,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.*
 import androidx.compose.ui.draw.*
 import androidx.compose.ui.graphics.*
@@ -77,7 +76,7 @@ fun Root(dark: Boolean, onDark: (Boolean) -> Unit) {
     BackHandler(chat != null || story != null) { if (story != null) story = null else chat = null }
 
     Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
-        AnimatedContent(tab, transitionSpec = { fadeIn(tween(250)) togetherWith fadeOut(tween(250)) }) {
+        AnimatedContent(tab, transitionSpec = { fadeIn(MaterialTheme.motionScheme.defaultEffectsSpec()) togetherWith fadeOut() }) {
             when (it) {
                 0 -> Feed()
                 1 -> SearchScreen()
